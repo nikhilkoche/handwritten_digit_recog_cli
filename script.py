@@ -1,14 +1,14 @@
-# Plot ad hoc mnist instances
+# Plot mnist instances
 from keras.datasets import mnist
 import matplotlib.pyplot as plt
 
-# load (downloaded if needed) the data, shuffled and split between train and test sets
+# load (downloaded) the data, shuffled and split between train and test sets
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 
 
 
-#IMPORT CLASSES
+#IMPORT PACKAGES & CLASSES
 import sys
 import numpy
 import keras
@@ -19,7 +19,7 @@ from keras.utils import np_utils
 from keras import backend as K
 K.set_image_dim_ordering('th')
 
-#INITIALIZE VARIABLES
+#initialize variables
 # set batch and epoch sizes
 batch_size = 200
 epochs = 10
@@ -35,12 +35,12 @@ print("Variables intialized")
 
 
 #RESHAPE DATA
-# reshape to be [samples][pixels][width][height]
+# reshape to [samples][pixels][width][height]
 X_train = X_train.reshape(X_train.shape[0], 1, img_rows, img_cols).astype('float32')
 X_test = X_test.reshape(X_test.shape[0], 1, img_rows, img_cols).astype('float32')
 input_shape = (1, img_rows, img_cols)
 
-# normalize inputs from 0-255 to 0-1
+# normalize i/p from 0-255 to 0-1
 X_train /= 255
 X_test  /= 255
 
@@ -48,7 +48,7 @@ print('x_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
-# one hot encode outputs
+# one hot encode o/p
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
 num_classes = y_test.shape[1]
@@ -58,7 +58,7 @@ from keras.models import load_model
 
 model = load_model('w1_data.hdf5')
 
-# Final evaluation of the model
+# Final evaluation
 scores = model.evaluate(X_test, y_test, verbose=0)
 print(scores)
 
